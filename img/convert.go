@@ -6,9 +6,22 @@ import (
 	"image/jpeg"
 	"image/png"
 	"io"
+	"path/filepath"
+	"strings"
 )
 
-func Convert(r io.Reader, w io.Writer, ext string) error {
+func getOutputFile(path, ext string) string {
+	if !strings.HasPrefix(ext, ".") {
+		ext = "." + ext
+	}
+	return path[:len(path)-len(filepath.Ext(path))] + ext
+}
+
+func isTargetFile(path, ext string) bool {
+	return strings.HasSuffix(path, ext)
+}
+
+func convert(r io.Reader, w io.Writer, ext string) error {
 	m, _, err := image.Decode(r)
 	if err != nil {
 		return err
