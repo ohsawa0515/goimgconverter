@@ -28,6 +28,7 @@ type Opt struct {
 	to   string
 }
 
+// Run -
 func (cli *CLI) Run(args []string) int {
 	var opt Opt
 	flags := flag.NewFlagSet("goimgconverter", flag.ContinueOnError)
@@ -53,7 +54,6 @@ func (cli *CLI) Run(args []string) int {
 }
 
 func (opt *Opt) validationOpt() error {
-
 	switch opt.from {
 	case "jpg", "jpeg", "png":
 	default:
@@ -102,7 +102,7 @@ func (cli *CLI) walk(root, from, to string) error {
 		}
 		defer w.Close()
 
-		if err := convert(r, w, filepath.Ext(path)); err != nil {
+		if err := Convert(r, w, filepath.Ext(path)); err != nil {
 			return err
 		}
 

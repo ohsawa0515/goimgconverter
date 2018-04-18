@@ -21,7 +21,8 @@ func isTargetFile(path, ext string) bool {
 	return strings.HasSuffix(path, ext)
 }
 
-func convert(r io.Reader, w io.Writer, ext string) error {
+// Convert change extension of image
+func Convert(r io.Reader, w io.Writer, ext string) error {
 	m, _, err := image.Decode(r)
 	if err != nil {
 		return err
